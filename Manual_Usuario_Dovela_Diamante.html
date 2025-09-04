@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Análisis FEA Dovela Diamante</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f5f5; color: #222; margin: 0; padding: 0; }
+        .container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 0 20px #0001; padding: 40px; }
+        h1, h2, h3 { color: #2c3e50; }
+        h1 { font-size: 2.2em; margin-bottom: 10px; }
+        h2 { border-bottom: 2px solid #3498db; padding-bottom: 6px; margin-top: 40px; }
+        h3 { margin-top: 30px; }
+        ul, ol { margin-left: 30px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fafafa; }
+        th, td { border: 1px solid #ddd; padding: 10px; }
+        th { background: #eaf6fb; }
+        .nav { background: #34495e; padding: 10px 0; border-radius: 8px; margin-bottom: 30px; }
+        .nav a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: bold; }
+        .nav a:hover { color: #3498db; }
+        .highlight { background: #eaf6fb; border-left: 4px solid #3498db; padding: 12px; margin: 18px 0; border-radius: 0 5px 5px 0; }
+        .footer { text-align: center; color: #888; margin-top: 40px; font-size: 0.95em; }
+        /* Centrar imágenes y gráficos */
+        img, .grafico {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 90%;
+            height: auto;
+        }
+        figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px 0;
+        }
+        figcaption {
+            text-align: center;
+            font-size: 0.95em;
+            color: #555;
+            margin-top: 8px;
+        }
+        @media print { .nav, .footer { display: none; } .container { box-shadow: none; border-radius: 0; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Manual de Usuario</h1>
+    <div class="nav">
+        <a href="#introduccion">Introducción</a>
+        <a href="#instalacion">Instalación</a>
+        <a href="#interfaz">Interfaz</a>
+        <a href="#parametros">Parámetros</a>
+        <a href="#analisis">Tipos de Análisis</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#problemas">Solución de Problemas</a>
+        <a href="#referencias">Referencias</a>
+    </div>
+    <h2 id="introduccion">1. Introducción</h2>
+    <p>Este programa realiza el análisis FEA de deflexión y transferencia de carga en dovelas diamante, típicamente usadas en juntas de losas de concreto. Permite visualizar contornos, calcular deflexiones, esfuerzos y eficiencia LTE, y está orientado a ingenieros civiles y estructurales.</p>
+    <div class="highlight">
+        <strong>Características principales:</strong>
+        <ul>
+            <li>Análisis de deflexión y esfuerzos (von Mises, principal, cortante)</li>
+            <li>Visualización gráfica profesional con contornos claros</li>
+            <li>Simulación avanzada de eficiencia de transferencia de carga (LTE)</li>
+            <li>Soporte para sistema métrico e imperial</li>
+            <li>Interfaz gráfica intuitiva (Tkinter)</li>
+        </ul>
+    </div>
+    <h2 id="instalacion">2. Instalación</h2>
+    <ol>
+        <li>Instale Python 3.8+ y pip.</li>
+        <li>Instale las dependencias:<br>
+            <code>pip install matplotlib numpy scikit-fem pygmsh scipy</code>
+        </li>
+        <li>Descargue el archivo <strong>deflexion_gui_complete.py</strong> y ejecútelo:<br>
+            <code>python deflexion_gui_complete.py</code>
+        </li>
+    </ol>
+    <h2 id="interfaz">3. Interfaz de Usuario</h2>
+    <ul>
+        <li><strong>Sistema de Unidades:</strong> Selección entre SI (métrico) e Imperial</li>
+        <li><strong>Parámetros de Dovela:</strong> Lado, espesor, carga, apertura de junta, módulo E, Poisson</li>
+        <li><strong>Parámetros de Concreto:</strong> Espesor losa, f'c, módulo E, Poisson</li>
+        <li><strong>Tipo de Análisis:</strong> Deflexión, esfuerzos, LTE avanzado</li>
+        <li><strong>Botones:</strong> Ejecutar análisis, análisis completo, LTE avanzado, ayuda</li>
+    </ul>
+    <h2 id="parametros">4. Parámetros de Entrada</h2>
+    <table>
+        <tr><th>Parámetro</th><th>Descripción</th><th>Unidades</th></tr>
+        <tr><td>Lado total del diamante</td><td>Dimensión principal de la dovela</td><td>mm / in</td></tr>
+        <tr><td>Espesor dovela</td><td>Grosor de la pieza de acero</td><td>mm / in</td></tr>
+        <tr><td>Carga aplicada</td><td>Fuerza sobre la dovela</td><td>kN / tons</td></tr>
+        <tr><td>Apertura de junta</td><td>Separación entre losas</td><td>mm / in</td></tr>
+        <tr><td>Módulo E dovela</td><td>Elasticidad del acero</td><td>MPa / ksi</td></tr>
+        <tr><td>Poisson dovela</td><td>Coeficiente de Poisson</td><td>-</td></tr>
+        <tr><td>Espesor losa concreto</td><td>Grosor de la losa</td><td>mm / in</td></tr>
+        <tr><td>f'c concreto</td><td>Resistencia a compresión</td><td>MPa / psi</td></tr>
+        <tr><td>Módulo E concreto</td><td>Elasticidad del concreto</td><td>MPa / ksi</td></tr>
+        <tr><td>Poisson concreto</td><td>Coeficiente de Poisson</td><td>-</td></tr>
+    </table>
+    <h2 id="analisis">5. Tipos de Análisis</h2>
+    <ul>
+        <li><strong>Deflexión:</strong> Calcula y grafica la deformación de la dovela bajo carga.</li>
+        <li><strong>Esfuerzo von Mises:</strong> Evalúa el criterio de falla del acero.</li>
+        <li><strong>Esfuerzo principal:</strong> Muestra la tensión máxima en la dovela.</li>
+        <li><strong>Esfuerzo cortante:</strong> Analiza la resistencia al corte.</li>
+        <li><strong>LTE avanzado:</strong> Simula la eficiencia de transferencia de carga y zonas óptimas.</li>
+        <li><strong>Análisis completo:</strong> Genera 4 gráficas simultáneas (deflexión, von Mises, principal, cortante).</li>
+    </ul>
+    <h2 id="resultados">6. Resultados e Interpretación</h2>
+    <ul>
+        <li>Las gráficas muestran contornos claros y zonas críticas.</li>
+        <li>Los valores máximos se indican en la gráfica y en un resumen.</li>
+        <li>La eficiencia LTE se presenta en porcentaje y zonas de color.</li>
+        <li>Las métricas técnicas incluyen: deflexión máxima, esfuerzos máximos, zonas óptimas y deficientes.</li>
+    </ul>
+    <figure>
+        <img src="ejemplo.png" alt="Ejemplo de gráfico FEA" class="grafico">
+        <figcaption>Ejemplo de gráfico FEA centrado</figcaption>
+    </figure>
+    <div class="highlight">
+        <strong>Recomendaciones:</strong>
+        <ul>
+            <li>Verifique que la deflexión máxima y los esfuerzos no excedan los límites del material.</li>
+            <li>Optimice la geometría y rigidez para mejorar la transferencia de carga.</li>
+            <li>Utilice el análisis LTE para predecir vida útil y zonas de desgaste.</li>
+        </ul>
+    </div>
+    <h2 id="problemas">7. Solución de Problemas</h2>
+    <ul>
+        <li><strong>El programa no abre:</strong> Verifique instalación de Python y dependencias.</li>
+        <li><strong>Errores de análisis:</strong> Revise los parámetros de entrada y unidades.</li>
+        <li><strong>Gráficas vacías:</strong> Asegúrese de que los valores no sean cero o negativos.</li>
+        <li><strong>Resultados inesperados:</strong> Compruebe la geometría y propiedades de materiales.</li>
+    </ul>
+    <h2 id="referencias">8. Referencias y Contacto</h2>
+    <ul>
+        <li><strong>Manual FEA:</strong> Zienkiewicz & Taylor, "The Finite Element Method"</li>
+        <li><strong>Normas:</strong> Eurocódigo 2, ACI 318</li>
+        <li><strong>Soporte técnico:</strong> <a href="mailto:german.rey@propisos.com">german.rey@propisos.com</a></li>
+    </ul>
+    <div class="footer">
+        &copy; 2025 FEA Dovela Diamante | Manual generado automáticamente<br>
+        Versión: 2.1 | Julio 2025
+    </div>
+</div>
+</body>
+</html>

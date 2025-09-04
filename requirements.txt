@@ -1,0 +1,35 @@
+# Requisitos para Análisis Profesional de Dovelas Diamante v2.0
+# Instalación: pip install -r requirements.txt
+
+# === DEPENDENCIAS CORE ===
+numpy>=1.21.0              # Cálculos numéricos fundamentales
+scipy>=1.7.0               # Algoritmos científicos y optimización
+matplotlib>=3.5.0          # Visualización de gráficos y resultados
+
+# === INTERFAZ GRÁFICA ===
+# tkinter viene incluido con Python estándar
+
+# === ANÁLISIS FEA (OPCIONAL) ===
+# scikit-fem>=8.0.0        # Análisis por elementos finitos
+# Descomente la línea anterior si desea funcionalidad FEA completa
+
+# === UTILIDADES DE DESARROLLO ===
+pytest>=7.0.0              # Framework de testing
+pytest-cov>=4.0.0          # Cobertura de tests
+black>=22.0.0              # Formateo de código
+flake8>=5.0.0              # Linting básico
+mypy>=0.991                # Verificación de tipos
+
+# === DOCUMENTACIÓN ===
+sphinx>=5.0.0              # Generación de documentación
+sphinx-rtd-theme>=1.0.0    # Tema para documentación
+
+# === PACKAGING ===
+setuptools>=65.0.0         # Herramientas de empaquetado
+wheel>=0.37.0              # Construcción de wheels
+twine>=4.0.0               # Subida a PyPI
+
+# === OPCIONAL: ANÁLISIS AVANZADO ===
+# pandas>=1.5.0            # Manipulación de datos (para reportes)
+# openpyxl>=3.0.0          # Exportación a Excel
+# reportlab>=3.6.0         # Generación de PDFs profesionales

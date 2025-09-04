@@ -1,0 +1,40 @@
+====================================
+ DOVELA DIAMANTE - LAUNCHER FILES
+====================================
+
+Los siguientes archivos están disponibles para ejecutar la aplicación:
+
+1. 🚀 run_app.ps1 (NUEVO - Launcher profesional)
+   - Script PowerShell con menú interactivo
+   - Múltiples modos de ejecución
+   - Verificación automática de dependencias
+
+2. 📋 ejecutar_dovela.bat (Launcher Windows)
+   - Script batch simple
+   - Menú básico de opciones
+
+3. 🐍 src/main.py (Aplicación principal)
+   - Punto de entrada modular
+   - Modos: GUI, consola, test
+
+COMANDOS PARA EJECUTAR:
+=======================
+
+PowerShell (Recomendado):
+    .\run_app.ps1
+    .\run_app.ps1 gui
+    .\run_app.ps1 help
+
+Batch:
+    ejecutar_dovela.bat
+
+Python directo:
+    python src/main.py
+
+NOTA: Si no ves run_app.ps1 en el explorador:
+- Presiona F5 para refrescar
+- Habilita "Extensiones de archivo" en Vista
+- Verifica que no esté en cuarentena del antivirus
+
+Tamaño del archivo run_app.ps1: 386 líneas
+Fecha de creación: Septiembre 3, 2025

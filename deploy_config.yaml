@@ -1,0 +1,47 @@
+# Configuración de Despliegue
+# DOVELA PROFESSIONAL v2.0
+
+name: dovela-professional
+version: 2.0.0
+author: Germán Andrés Rey Carrillo
+company: PROPISOS S.A.
+
+# Información del repositorio
+github:
+  username: germanrey  # Cambiar por su usuario de GitHub
+  repository: dovela-professional
+  description: "Análisis Profesional de Dovelas Diamante con Elementos Finitos"
+  
+# Configuración de releases
+release:
+  include_source: true
+  include_executable: true
+  platforms:
+    - windows-x64
+    - linux-x64
+    - macos-x64
+
+# Archivos a incluir en el release
+package:
+  include:
+    - "src/"
+    - "requirements.txt"
+    - "ejecutar_dovelas.py"
+    - "README.md"
+    - "LICENSE"
+    - "version.py"
+    - "instalar.bat"
+    - "ejecutar_aplicacion.bat"
+  exclude:
+    - "__pycache__/"
+    - ".venv/"
+    - "logs/"
+    - "*.pyc"
+    - ".git/"
+
+# Configuración de PyInstaller para ejecutables
+executable:
+  name: "DovelaProfilessional"
+  icon: "assets/icon.ico"  # Si tiene un icono
+  console: false
+  onefile: true
