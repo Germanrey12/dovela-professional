@@ -4,7 +4,9 @@
     { "src": "public/**", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/favicon.ico", "dest": "/favicon.svg" },
-    { "src": "/", "dest": "/index.html" }
-  ]
+    { "src": "/favicon.ico", "dest": "/public/favicon.svg" },
+    { "src": "^/$", "dest": "/public/index.html" },
+    { "src": "^/index.html$", "dest": "/public/index.html" }
+  ],
+  "cleanUrls": true
 }
