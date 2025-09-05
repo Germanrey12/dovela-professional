@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dovela Professional — Landing</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <style>
+    body{font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:40px; color:#222}
+    header{display:flex;align-items:center;gap:18px}
+    .logo{width:72px;height:72px}
+    main{max-width:900px;margin-top:24px}
+    .card{background:#fafafa;border:1px solid #eee;padding:18px;border-radius:8px}
+    a.button{display:inline-block;padding:10px 14px;background:#0b61ff;color:white;border-radius:6px;text-decoration:none}
+    footer{margin-top:28px;color:#666;font-size:14px}
+    pre{background:#f4f4f4;padding:8px;border-radius:6px;overflow:auto}
+  </style>
+</head>
+<body>
+  <header>
+    <img class="logo" src="/favicon.svg" alt="logo"/>
+    <div>
+      <h1>Dovela Professional</h1>
+      <div>Aplicación de escritorio en Python (Tkinter) — vista estática para Vercel</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Descripción</h2>
+      <p>Este repositorio contiene una aplicación de escritorio (interfaz Tkinter) para análisis de dovelas diamante. No es una aplicación web ejecutable en el navegador. Aquí mostramos una landing que explica el proyecto y evita errores 404 comunes (por ejemplo <code>/favicon.ico</code>).</p>
+
+      <p>Opciones recomendadas:</p>
+      <ul>
+        <li>Descargar el código y ejecutarlo localmente (Python 3.10+ y dependencias del <code>requirements.txt</code>).</li>
+        <li>Crear un front-end web y un backend (FastAPI) si se quiere funcionalidad accesible desde Vercel.</li>
+      </ul>
+
+      <p>
+        <a class="button" href="https://github.com/Germanrey12/dovela-professional" target="_blank">Repositorío en GitHub</a>
+      </p>
+
+      <h3>Instrucciones rápidas para probar localmente</h3>
+      <pre>cd public
+python -m http.server 8000</pre>
+      <p>Luego abrir <a href="http://localhost:8000" target="_blank">http://localhost:8000</a></p>
+
+    </section>
+
+    <footer>
+      <div>Nota: si quieres que la aplicación funcione como servicio web puedo ayudarte a crear una API (FastAPI) y un front-end React/HTML desplegables en Vercel + Render/ Railway para el backend.</div>
+    </footer>
+  </main>
+</body>
+</html>
