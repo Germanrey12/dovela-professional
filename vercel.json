@@ -7,18 +7,18 @@
     { "src": "web/**", "use": "@vercel/static" },
     { "src": "api/main.py", "use": "@vercel/python" }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "api/main.py"
+      "source": "/api/(.*)",
+      "destination": "api/main.py"
     },
     {
-      "src": "/analyze",
-      "dest": "api/main.py"
+      "source": "/analyze",
+      "destination": "api/main.py"
     },
     {
-      "src": "/(.*)",
-      "dest": "/web/$1"
+      "source": "/(.*)",
+      "destination": "/web/$1"
     }
   ],
   "env": {
