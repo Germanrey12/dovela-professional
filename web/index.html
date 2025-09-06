@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dovela Professional - Análisis Web</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="/favicon.svg" alt="Logo Dovela Professional" class="logo">
+      <div>
+        <h1>Dovela Professional</h1>
+        <p>Análisis de Dovelas Diamante - Versión Web</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="analysis-container">
+      <div class="parameters-panel">
+        <h2>Parámetros de Análisis</h2>
+        
+        <div class="form-group">
+          <label for="load">Carga aplicada (kN):</label>
+          <input type="number" id="load" value="22.2" min="0.1" step="0.1">
+        </div>
+        
+        <div class="form-group">
+          <label for="thickness">Espesor dovela (mm):</label>
+          <input type="number" id="thickness" value="12.7" min="0.1" step="0.1">
+        </div>
+        
+        <div class="form-group">
+          <label for="analysis-type">Tipo de análisis:</label>
+          <select id="analysis-type">
+            <option value="von_mises">Esfuerzo Von Mises</option>
+            <option value="principal">Esfuerzos Principales</option>
+            <option value="cortante">Esfuerzos Cortantes</option>
+            <option value="lte_fisico">Modelo LTE</option>
+            <option value="completo">Análisis Completo</option>
+          </select>
+        </div>
+        
+        <button id="analyze-btn" class="primary-button">Analizar Dovela</button>
+      </div>
+      
+      <div class="results-panel">
+        <h2>Resultados del Análisis</h2>
+        
+        <div id="loading" class="hidden">
+          <div class="spinner"></div>
+          <p>Analizando...</p>
+        </div>
+        
+        <div id="results-content" class="hidden">
+          <div class="plot-container">
+            <img id="plot-image" alt="Gráfico de análisis" class="result-plot">
+          </div>
+          
+          <div class="metrics">
+            <div class="metric-card">
+              <div class="metric-title">Esfuerzo Máximo</div>
+              <div class="metric-value" id="stress-max">-- MPa</div>
+            </div>
+            
+            <div class="metric-card">
+              <div class="metric-title">Esfuerzo Mínimo</div>
+              <div class="metric-value" id="stress-min">-- MPa</div>
+            </div>
+            
+            <div class="metric-card">
+              <div class="metric-title">Deformación</div>
+              <div class="metric-value" id="displacement">-- mm</div>
+            </div>
+            
+            <div class="metric-card">
+              <div class="metric-title">Factor de Seguridad</div>
+              <div class="metric-value" id="safety-factor">--</div>
+            </div>
+          </div>
+          
+          <div class="summary-container">
+            <h3>Resumen del Análisis</h3>
+            <p id="analysis-summary" class="summary-text"></p>
+          </div>
+        </div>
+        
+        <div id="error-message" class="error hidden">
+          <p>Error al realizar el análisis. Por favor intente de nuevo.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="info-container">
+      <h2>Sobre el Análisis de Dovelas Diamante</h2>
+      <p>Esta aplicación web ofrece una versión en línea de la herramienta Dovela Professional para analizar dovelas de acero en forma de diamante. El análisis incluye cálculos de esfuerzos, deformaciones y factores de seguridad basados en principios de mecánica estructural y elementos finitos.</p>
+      
+      <div class="info-columns">
+        <div class="info-column">
+          <h3>Características</h3>
+          <ul>
+            <li>Análisis completo de esfuerzos de Von Mises</li>
+            <li>Cálculo de esfuerzos principales</li>
+            <li>Evaluación de esfuerzos cortantes</li>
+            <li>Modelo LTE (Load Transfer Efficiency)</li>
+            <li>Visualización de resultados con mapas de contorno</li>
+          </ul>
+        </div>
+        
+        <div class="info-column">
+          <h3>Aplicaciones</h3>
+          <ul>
+            <li>Diseño de juntas de dilatación en pavimentos</li>
+            <li>Análisis estructural en construcción</li>
+            <li>Evaluación de capacidad de carga</li>
+            <li>Validación de diseños según normativas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Dovela Professional Web &copy; 2025 | <a href="https://github.com/Germanrey12/dovela-professional" target="_blank">Ver en GitHub</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

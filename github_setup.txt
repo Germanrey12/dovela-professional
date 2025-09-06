@@ -1,0 +1,13 @@
+# Configuración de GitHub Token
+# ============================
+
+# Cuando tengas tu Personal Access Token de GitHub, ejecuta este comando
+# reemplazando TU_TOKEN_AQUI con el token real:
+
+# git remote set-url origin https://Germanrey12:TU_TOKEN_AQUI@github.com/Germanrey12/dovela-professional.git
+# git push -u origin main
+
+# El token debe tener permisos de "repo" completos
+# Expirará en 90 días, así que guárdalo en un lugar seguro
+
+# Después del push exitoso, puedes eliminar este archivo por seguridad

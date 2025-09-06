@@ -1,4 +1,8 @@
-<!doctype html>
+# Cabecera + status
+(Invoke-WebRequest -Uri 'https://dovela-professional-fzaoag472-germanrey12s-projects.vercel.app/' -UseBasicParsing).StatusCode
+
+# Contenido HTML (la página de error de Vercel suele incluir pistas)
+(Invoke-WebRequest -Uri 'https://dovela-professional-fzaoag472-germanrey12s-projects.vercel.app/' -UseBasicParsing).Content | Out-File -Encoding utf8 .\vercel_root_response.html; Get-Content .\vercel_root_response.html -Raw<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">

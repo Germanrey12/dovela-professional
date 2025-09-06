@@ -659,6 +659,40 @@ class ModernParameterPanel:
 
 
 class ResultsVisualizationPanel:
+    def _calculate_temperature_factor(self, thermal_params):
+        """Calcula factor de temperatura según AASHTO"""
+        service_temp = thermal_params.get('service_temperature', 23)  # °C
+        temp_max = thermal_params.get('max_temperature', 50)
+        temp_min = thermal_params.get('min_temperature', -20)
+        # Factor basado en rango térmico (simplificado)
+        temp_range = temp_max - temp_min
+        if temp_range > 60:
+            return 1.15  # Condiciones severas
+        elif temp_range > 40:
+            return 1.10  # Condiciones moderadas
+        else:
+            return 1.05  # Condiciones normales
+
+    def _calculate_environmental_factor(self, env_params):
+        """Calcula factor ambiental según exposición"""
+        exposure = env_params.get('exposure_condition', 'Normal')
+        humidity = env_params.get('humidity_avg', 65)
+        wind_speed = env_params.get('wind_speed_max', 25)
+        # Factor base por exposición
+        exposure_factors = {
+            'Normal': 1.0,
+            'Marina': 1.2,
+            'Industrial': 1.15,
+            'Severa': 1.25
+        }
+        base_factor = exposure_factors.get(exposure, 1.0)
+        # Ajuste por humedad
+        if humidity > 80:
+            base_factor *= 1.05
+        # Ajuste por viento
+        if wind_speed > 40:
+            base_factor *= 1.03
+        return base_factor
     """Panel de visualización de resultados con matplotlib integrado"""
     
     def __init__(self, parent: ttk.Notebook, parameter_panel=None, app=None):
@@ -1378,7 +1412,21 @@ Espesor: {self.current_results.geometry.thickness.format()}
         geometry = params.get('geometry', {})
         loads = params.get('loads', {})
         material = params.get('material', {})
-        
+        thermal = params.get('thermal', {})
+        environmental = params.get('environmental', {})
+
+        # Calcular factores térmico y ambiental usando los métodos existentes
+        temp_factor = self._calculate_temperature_factor({
+            'service_temperature': thermal.get('service_temperature', 23),
+            'temperature_max': thermal.get('max_temperature', 50),
+            'temperature_min': thermal.get('min_temperature', -20)
+        })
+        env_factor = self._calculate_environmental_factor({
+            'exposure_condition': environmental.get('corrosion_exposure', 'Normal'),
+            'humidity_avg': environmental.get('humidity', 65),
+            'wind_speed_max': environmental.get('wind_speed', 25)
+        })
+
         report = f"""
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                        REPORTE TÉCNICO DE ANÁLISIS                          ║
@@ -1405,6 +1453,20 @@ Carga aplicada:              {loads.get('magnitude', 'N/A')} kN
 Factor de seguridad objetivo: {loads.get('safety_factor_target', 'N/A')}
 Factor de impacto:           {loads.get('impact_factor', 'N/A')}
 Ciclos de fatiga:            {loads.get('fatigue_cycles', 'N/A'):,} ciclos
+
+🌡️ VALIDACIÓN TÉRMICA:
+─────────────────────────────────────────────────────────────────────────────
+Temperatura de servicio:     {thermal.get('service_temperature', 'N/A')} °C
+Temperatura máxima:          {thermal.get('max_temperature', 'N/A')} °C
+Temperatura mínima:          {thermal.get('min_temperature', 'N/A')} °C
+Factor térmico calculado:    {temp_factor:.3f}
+
+🌦️ VALIDACIÓN AMBIENTAL:
+─────────────────────────────────────────────────────────────────────────────
+Exposición a corrosión:      {environmental.get('corrosion_exposure', 'Normal')}
+Humedad relativa:            {environmental.get('humidity', 'N/A')} %
+Viento máximo:               {environmental.get('wind_speed', 'N/A')} km/h
+Factor ambiental calculado:  {env_factor:.3f}
 
 🔧 PROPIEDADES DEL MATERIAL:
 ─────────────────────────────────────────────────────────────────────────────

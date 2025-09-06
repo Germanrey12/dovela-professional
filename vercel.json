@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "buildCommand": "cd web && echo 'Web files ready'",
+  "outputDirectory": "web",
+  "installCommand": "pip install -r api/requirements.txt",
+  "builds": [
+    { "src": "web/**", "use": "@vercel/static" },
+    { "src": "api/main.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/analyze",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/web/$1"
+    }
+  ],
+  "env": {
+    "PYTHON_VERSION": "3.10"
+  },
+  "cleanUrls": true
+}
